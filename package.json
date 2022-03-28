@@ -1,0 +1,23 @@
+{
+  "name": "zero-cli",
+  "version": "1.0.0",
+  "description": "A CLI app based on the Zero Fasting android app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js --ignore data/data.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikooOOoo16/node-zero-cli.git"
+  },
+  "author": "Kristijan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kikooOOoo16/node-zero-cli/issues"
+  },
+  "homepage": "https://github.com/kikooOOoo16/node-zero-cli#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
