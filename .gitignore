@@ -1,3 +1,6 @@
+# Local JSON file
+./data/data.json
+
 # IDE related configs
 .idea
 

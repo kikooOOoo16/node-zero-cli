@@ -18,8 +18,18 @@ class DataService {
                     this._userData.currentFast._type
                 );
         } catch (e) {
-            console.log(`There was a problem reading the JSON file. ${e}`);
-            process.exit();
+            console.log(`\nThere was a problem reading the JSON file. ${e}`);
+            console.log('Attempting to create a new JSON file...');
+
+            // create empty object that represents the app's state
+            const emptyUserState = {
+                userData :{
+                    allFastSessions: [],
+                    currentFast: {}
+                }
+            }
+            // create json file
+            this.saveDataToJSON(emptyUserState);
         }
     }
 
@@ -106,11 +116,11 @@ class DataService {
 
     calculateFastEndDateTime = (startDateTime, type) => {
         // Convert hours from fast type to unix timestamp
-        let hoursToAdd = type*60*60*1000;
+        const hoursToAdd = type*60*60*1000;
         // get unix  date timestamp from start date
         const dateTime = Date.parse(startDateTime);
         // add the two timestamps to calculate end date
-        let endDateTime = dateTime + hoursToAdd;
+        const endDateTime = dateTime + hoursToAdd;
         // convert to JS datetime object and return
         return new Date(endDateTime);
     }

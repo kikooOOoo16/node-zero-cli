@@ -26,20 +26,26 @@ module.exports = class CurrentFastMenu {
     }
 
     calculateElapsedTime = (startedFast) => {
-        // get unix  date timestamp from start and end date
+        // get unix  date timestamp from fast start datetime
         const startedDateTimeUnix = Date.parse(startedFast);
         // add the two timestamps to calculate end date
-        let elapsedTimeUnix = Date.now() - (startedDateTimeUnix + 60*60*1000); // add an hour to start date
+        const elapsedTimeUnix = Date.now() - startedDateTimeUnix;
 
         // check to see if fast has started yet if it hasn't return 0
         if (elapsedTimeUnix < 0) {
             return 0;
         }
 
-        // convert to JS datetime object and return correct string
-        const elapsedTimeDateTime = new Date(elapsedTimeUnix);
+        // convert to unix timestamp to HH:MM:SS format and return
+        let seconds = Math.floor((elapsedTimeUnix / 1000) % 60),
+            minutes = Math.floor((elapsedTimeUnix / (1000 * 60)) % 60),
+            hours = Math.floor((elapsedTimeUnix / (1000 * 60 * 60)) % 24);
 
-        return (`${elapsedTimeDateTime.toLocaleTimeString('en-GB')}`);
+        hours = (hours < 10) ? '0' + hours : hours;
+        minutes = (minutes < 10) ? '0' + minutes : minutes;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+        return (`${hours}:${minutes}:${seconds}`);
     }
 
     get menu() {

@@ -15,7 +15,7 @@ const showMainIfActiveFast = () => {
     // Get fast data from JSON (userCurrentFast : Fast)
     const fastData = dataService.userCurrentFast;
 
-    if (!fastData.status) {
+    if (!fastData || !fastData.status) {
         showMainIfNoActiveFast();
         return;
     }
@@ -62,7 +62,7 @@ const showMainIfActiveFast = () => {
                 showMainIfActiveFast(); /* show menu again if input does not match */
         }
     });
-}
+};
 
 // CLI Main Menu logic if there is no active fast
 const showMainIfNoActiveFast = () => {
@@ -87,7 +87,7 @@ const showMainIfNoActiveFast = () => {
         switch(input) {
             case '1':
                 // Call to JSON singleton for fast status
-                console.log(`\nThere is no active fast session.\n`);
+                console.log('\nThere is no active fast session.\n');
                 showMainIfNoActiveFast();
                 break;
             case '2':
@@ -107,7 +107,7 @@ const showMainIfNoActiveFast = () => {
             /* show menu again if input does not match */
         }
     });
-}
+};
 
 // CLI Menu for new and update fast
 const configureFastSession = async () => {
@@ -132,7 +132,7 @@ const configureFastSession = async () => {
                 resolve(input);
             });
         });
-    }
+    };
 
     // Prompt user for fast type selection
     const getFastType = () => {
@@ -169,7 +169,7 @@ const configureFastSession = async () => {
                 }
             });
         });
-    }
+    };
 
     const fastStartDate = await getFastDate();
     const fastType = await getFastType();
@@ -182,6 +182,6 @@ const configureFastSession = async () => {
 
     // Show active fast main menu
     showMainIfActiveFast();
-}
+};
 
-module.exports = {showMainIfActiveFast, showMainIfNoActiveFast, configureFastSession}
+module.exports = {showMainIfActiveFast, showMainIfNoActiveFast, configureFastSession};
