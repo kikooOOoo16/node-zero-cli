@@ -5,7 +5,9 @@ const NoCurrentActiveFastMenu = require('./cli-menus/no-current-active-fast-menu
 const FastTypeOptionsMenu = require('./cli-menus/fast-types-options-menu');
 const AllPreviousFastsInfoMenu = require('./cli-menus/show-all-previous-active-fasts');
 
-module.exports = CliMenuFactory = (type) => {
+const chalk = require('chalk');
+
+cliMenuFactory = (type) => {
     switch (type) {
         case 'NO_ACTIVE_FAST' :
         {
@@ -36,3 +38,13 @@ module.exports = CliMenuFactory = (type) => {
     }
 }
 
+const buildMenu = (type) => {
+    let cliMenu = cliMenuFactory(type);
+    for (let i = 0; i < cliMenu.length; i++) {
+        console.log(
+            chalk.rgb(128,107,182)
+            (cliMenu[i].number === '' ? cliMenu[i].number : (cliMenu[i].number + ' : ')) + cliMenu[i].text);
+    }
+}
+
+module.exports = buildMenu;

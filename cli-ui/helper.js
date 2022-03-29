@@ -1,5 +1,3 @@
-const CliMenuFactory = require('./cli-menu-factory');
-
 const parseFastStartDate = (dateTimeString) => {
     // get current year
     const currentYear = (new Date()).getFullYear();
@@ -17,11 +15,4 @@ const parseFastStartDate = (dateTimeString) => {
     return new Date(dateTime);
 };
 
-const buildMenu = (type) => {
-    let cliMenu = CliMenuFactory(type);
-    for (let i = 0; i < cliMenu.length; i++) {
-        console.log(`${cliMenu[i].number === '' ? cliMenu[i].number : cliMenu[i].number + ':'} ${cliMenu[i].text}`);
-    }
-}
-
-module.exports = { parseFastStartDate, buildMenu }
+module.exports = parseFastStartDate;

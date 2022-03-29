@@ -1,4 +1,5 @@
 const Fast = require('./fast');
+const chalk = require('chalk');
 
 const { readFileSync, writeFileSync } = require('fs');
 
@@ -18,9 +19,14 @@ class DataService {
                     this._userData.currentFast._type
                 );
         } catch (e) {
-            console.log(`\nThere was a problem reading the JSON file. ${e}`);
-            console.log('Attempting to create a new JSON file...');
-
+            console.log(
+                chalk.red
+                (`\nThere was a problem reading the JSON file. ${e}`)
+            );
+            console.log(
+                chalk.red
+                ('Attempting to create a new JSON file...')
+            );
             // create empty object that represents the app's state
             const emptyUserState = {
                 userData :{
@@ -46,12 +52,12 @@ class DataService {
     }
 
     // Update or Create Fast
-    configureFast(fastStartDateTime, fastType) {
+    configureFast = (fastStartDateTime, fastType) => {
         // calculate fast end datetime
         const fastEndDateTime = this.calculateFastEndDateTime(fastStartDateTime, fastType);
 
-        let newFastObj = new Fast(true, fastStartDateTime, fastEndDateTime, fastType);
-        let newState = {
+        const newFastObj = new Fast(true, fastStartDateTime, fastEndDateTime, fastType);
+        const newState = {
             userData: {
                 ...this._userData,
                 currentFast: {
@@ -66,10 +72,12 @@ class DataService {
         this._userData = newState.userData;
         this._userCurrentFast = newFastObj;
 
-        console.log(`Successfully configured the fast.\n`);
+        console.log(
+            chalk.rgb(147,96,176)
+            (`Successfully configured the fast.\n`));
     }
 
-    endCurrentFast() {
+    endCurrentFast = () => {
         let newFastObj;
         let newAllFastSessions;
 
@@ -102,14 +110,18 @@ class DataService {
         this._userCurrentFast = newFastObj;
 
         // Notify user of changes
-        console.log(`\nFast ended successfully.\n`);
+        console.log(
+            chalk.rgb(147,96,176)
+            (`\nFast ended successfully.\n`));
     }
 
     saveDataToJSON = (userState) => {
         try {
             writeFileSync('./data/data.json', JSON.stringify(userState), 'utf8');
         } catch (error) {
-            console.log(`There was an error while writing to the JSON file. ${error}`);
+            console.log(
+                chalk.red
+                (`There was an error while writing to the JSON file. ${error}`));
             process.exit();
         }
     }

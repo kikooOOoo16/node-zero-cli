@@ -13,7 +13,7 @@ const validateDatetimeFormat = (datetime) => {
 
     // check if all input data is present
     if (valuesArr.length !== 3) {
-        console.error('Please insert all of the required data.')
+        console.error(chalk.red('Please insert all of the required data.'));
         return false;
     }
 
@@ -21,19 +21,19 @@ const validateDatetimeFormat = (datetime) => {
     const timeValues = valuesArr[2].split(':');
 
     if (timeValues.length !== 2) {
-        console.error('Incorrect time format, the correct time format is HH:MM.');
+        console.error(chalk.red('Incorrect time format, the correct time format is HH:MM.'));
         return false;
     }
 
     // check if time values are correct
     if (timeValues[0] < 1 || timeValues[0] > 23 || timeValues[1] < 0 || timeValues[1] > 59) {
-        console.error('Incorrect time format, the minutes or hour values are out of reach.');
+        console.error(chalk.red('Incorrect time format, the minutes or hour values are out of reach.'));
         return false;
     }
 
     // check if month value is correct
     if (monthsWith31Days.indexOf(valuesArr[1].toLowerCase()) === -1 && monthsWith30Days.indexOf(valuesArr[1].toLowerCase()) === -1 && valuesArr[1].toLowerCase() !== 'february') {
-        console.error('Incorrect month input, please enter the full name of the month.')
+        console.error(chalk.red('Incorrect month input, please enter the full name of the month.'));
         return false;
     }
 
@@ -47,7 +47,7 @@ const validateDatetimeFormat = (datetime) => {
     } else if ((valuesArr[0] >= 1 && valuesArr[0] <= 28) && !isCurrentYearLeapYear) {
         return true;
     } else {
-        console.error('Incorrect date input for the selected month.');
+        console.error(chalk.red('Incorrect date input for the selected month.'));
         return false;
     }
 }

@@ -9,8 +9,6 @@ module.exports = class FastTypeOptionsMenu {
         this._menu[2] = new MenuElement(3, '18 Hour fast');
         this._menu[3] = new MenuElement(4, '20 Hour fast');
         this._menu[4] = new MenuElement(5, '36 Hour fast');
-        this._menu[5] = new MenuElement(6, 'Go back.');
-
     }
 
     get menu() {

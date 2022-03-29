@@ -1,12 +1,15 @@
 const DataServiceSingleton = require('../data/data-service');
-const { parseFastStartDate, buildMenu } = require('./helper');
+const { parseFastStartDate } = require('./helper');
 const { validateDatetimeFormat } = require('./input-validators');
+const buildMenu = require('./cli-menu-factory');
+const chalk = require('chalk');
+
+// readline instance and menu helper variable for swapping readline instances
+const readline = require('readline');
+let menu;
 
 // Get Singleton instance
 const dataService = new DataServiceSingleton().instance;
-
-const readline = require('readline');
-let menu;
 
 // CLI Main Menu logic if there is an active fast session
 const showMainIfActiveFast = () => {
@@ -14,12 +17,13 @@ const showMainIfActiveFast = () => {
     // Get fast data from JSON (userCurrentFast : Fast)
     const fastData = dataService.userCurrentFast;
 
+    // if there is no fast data switch to the no active fast main menu
     if (!fastData || !fastData.status) {
         showMainIfNoActiveFast();
         return;
     }
 
-    // Log the menu
+    // call helper method that u
     buildMenu('ACTIVE_FAST');
 
     // Check if there is already a menu active. If true, close it.
@@ -33,7 +37,7 @@ const showMainIfActiveFast = () => {
     });
 
     // Ask question
-    menu.question('Please select an option: ', input => {
+    menu.question(chalk.magenta('Please select an option: '), input => {
         switch(input) {
             case '1':
                 // Call to JSON singleton for fast status
@@ -82,7 +86,7 @@ const showMainIfNoActiveFast = () => {
     });
 
     // Ask question
-    menu.question('Please select an option: ', input => {
+    menu.question(chalk.magenta('Please select an option: '), input => {
         switch(input) {
             case '1':
                 // Call to JSON singleton for fast status
@@ -129,7 +133,7 @@ const configureFastSession = async () => {
     // Prompt user for fast starting date/time
     const getFastDate = () => {
         return new Promise((resolve, reject) => {
-            menu.question('Enter the starting date and time for your fast (Example: 22 March 13:00):', input => {
+            menu.question(chalk.magenta('Enter the starting date and time for your fast (Example: 22 March 13:00):'), input => {
                 // validate string input
                 if (validateDatetimeFormat(input)) {
                     resolve(input);
@@ -187,7 +191,7 @@ const configureFastSession = async () => {
     const fastType = await getFastType()
         .catch(e => {
             if (e) {
-                console.error(`${e}`);
+                console.error(chalk.red(`${e}`));
                 inputError = true;
             }
         });
