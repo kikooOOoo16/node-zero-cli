@@ -1,7 +1,8 @@
 const CliMenuFactory = require('./cli-menu-factory');
-const dataService = require('../data/data-service');
-const Fast = require('../data/fast');
+const DataServiceSingleton = require('../data/data-service');
 
+// Get Singleton instance
+const dataService = new DataServiceSingleton().instance;
 
 let readline = require('readline');
 let menu;
@@ -13,17 +14,15 @@ const buildMenu = (type) => {
     }
 }
 
-// CLI Menu if there is an active fast session
+// CLI Main Menu logic if there is an active fast session
 const showMainIfActiveFast = () => {
     // Clear screen
     // process.stdout.write('\033c');
 
     // Get fast data from JSON
-    const userData = dataService.userData;
-    const {_status, _started, _ending, _type} = userData.currentFast;
-    const fastData = new Fast(_status, _started, _ending, _type);
+    const fastData = dataService.userCurrentFast;
 
-    if (!fastData.status) {
+    if (!fastData._status) {
         showMainIfNoActiveFast();
         return;
     }
@@ -55,10 +54,10 @@ const showMainIfActiveFast = () => {
                 showMainIfNoActiveFast();
                 break;
             case '3':
+                // pass true in order to determine if a fast is edited or a new one is created
                 configureFastSession();
                 break;
             case '4':
-                console.log('\n');
                 buildMenu('ALL_PREVIOUS_FASTS');
                 showMainIfActiveFast();
                 break;
@@ -72,7 +71,7 @@ const showMainIfActiveFast = () => {
     });
 }
 
-// CLI For main menu if there is no active fast
+// CLI Main Menu logic if there is no active fast
 const showMainIfNoActiveFast = () => {
     // Clear screen
     // process.stdout.write('\033c');
@@ -122,7 +121,6 @@ const configureFastSession = async () => {
     // Clear screen
     process.stdout.write('\033c');
 
-    buildMenu('FAST_TYPE_OPTIONS');
 
     // Check if there is already a menu active. If true, close it.
     if(menu) menu.close();
@@ -134,37 +132,60 @@ const configureFastSession = async () => {
         terminal: false
     });
 
-    // Ask question
-    new Promise(resolve => {
-        menu.question('Select to which type you want to update your current fast? \n', input => {
-            switch(input) {
-                case '1':
-                    console.log('You updated your fast to a 13 hour type.');
-                    showMainIfActiveFast();
-                    break;
-                case '2':
-                    console.log('You updated your fast to a 16 hour type.');
-                    showMainIfActiveFast();
-                    break;
-                case '3':
-                    console.log('You updated your fast to a 18 hour type.');
-                    showMainIfActiveFast();
-                    break;
-                case '4':
-                    console.log('You updated your fast to a 20 hour type.');
-                    showMainIfActiveFast();
-                    break;
-                case '5':
-                    console.log('You updated your fast to a 36 hour type.');
-                    showMainIfActiveFast();
-                    break;
-                case '6':
-                    resolve();
-                    break;
-                default: console.log('\nPlease select a valid option.\n') /* show menu again if input does not match */;
-            }
+    // Prompt user for fast starting date/time
+    const getFastDate = () => {
+        return new Promise(resolve => {
+            menu.question('Enter the starting date and time for your fast (Example: 22 March 13:00):', input => {
+                resolve(input);
+            });
         });
-    }).then(() => showMainIfActiveFast());
+    }
+
+    // Prompt user for fast type selection
+    const getFastType = () => {
+        // build the fast types options menu
+        buildMenu('FAST_TYPE_OPTIONS');
+
+        return new Promise((resolve, reject) => {
+            menu.question('Select your fast type: \n', input => {
+                switch(input) {
+                    case '1':
+                        console.log('You selected a 13 hours fast type.');
+                        resolve('13');
+                        break;
+                    case '2':
+                        console.log('You selected a 16 hours fast type..');
+                        resolve('16');
+                        break;
+                    case '3':
+                        console.log('You selected a 18 hours fast type.');
+                        resolve('18');
+                        break;
+                    case '4':
+                        console.log('You selected a 20 hours fast type.');
+                        resolve('20');
+                        break;
+                    case '5':
+                        console.log('You selected a 36 hour type.');
+                        resolve('36');
+                        break;
+                    case '6':
+                        reject('Invalid data selected');
+                        break;
+                    default: console.log('\nPlease select a valid option.\n') /* show menu again if input does not match */;
+                }
+            });
+        });
+    }
+
+    const fastStartDate = await getFastDate();
+    const fastType = await getFastType();
+
+    // Edit fast data and update state
+    dataService.configureFast(fastStartDate, fastType);
+
+    // Show active fast main menu
+    showMainIfActiveFast();
 }
 
 module.exports = {showMainIfActiveFast, showMainIfNoActiveFast, configureFastSession}

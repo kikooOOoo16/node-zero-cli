@@ -1,3 +1,5 @@
+const MenuElement = require('../cli-menu-element');
+
 module.exports = class ActiveFastMenu {
     _menu = [];
 

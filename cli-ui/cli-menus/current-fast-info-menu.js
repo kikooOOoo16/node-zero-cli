@@ -1,5 +1,8 @@
 const MenuElement = require('../cli-menu-element');
-const dataService = require('../../data/data-service');
+const DataServiceSingleton = require('../../data/data-service');
+
+// Get singleton instance
+const dataService = new DataServiceSingleton().instance;
 
 module.exports = class CurrentFastMenu {
     _menu = [];

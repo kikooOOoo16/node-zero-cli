@@ -1,9 +1,8 @@
-// The DataServiceSingleton is cached after the first use because of module caching making this a Singleton
 const Fast = require('./fast');
 
 const { readFileSync, writeFileSync } = require('fs');
 
-class DataServiceSingleton {
+class DataService {
     _userData;
     _userCurrentFast;
     constructor() {
@@ -36,6 +35,27 @@ class DataServiceSingleton {
         return this._userData.allFastSessions;
     }
 
+    configureFast(date, type) {
+        let newFastObj = new Fast(true, date, type, type);
+        let newState = {
+            userData: {
+                ...this._userData,
+                currentFast: {
+                    ...newFastObj
+                }
+            }
+        }
+        // Save the new state to the JSON file
+        this.saveDataToJSON(newState);
+
+
+        // Set local user data state to the new state
+        this._userData = newState.userData;
+        this._userCurrentFast = newFastObj;
+
+        console.log(`Successfully configured the fast.\n`);
+    }
+
     endCurrentFast() {
         let newFastObj;
         let newAllFastSessions;
@@ -66,6 +86,7 @@ class DataServiceSingleton {
 
         // Set local user data state to the new state
         this._userData = newState.userData;
+        this._userCurrentFast = newFastObj;
 
         // Notify user of changes
         console.log(`\nFast ended successfully.\n`);
@@ -79,7 +100,17 @@ class DataServiceSingleton {
             process.exit();
         }
     }
-
 }
 
-module.exports = new DataServiceSingleton();
+module.exports = class DataServiceSingleton {
+
+    constructor() {
+        if (!DataServiceSingleton._instance) {
+            DataServiceSingleton._instance = new DataService();
+        }
+    }
+
+    get instance() {
+        return DataServiceSingleton._instance;
+    }
+}
