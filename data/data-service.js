@@ -35,8 +35,12 @@ class DataService {
         return this._userData.allFastSessions;
     }
 
-    configureFast(date, type) {
-        let newFastObj = new Fast(true, date, type, type);
+    // Update or Create Fast
+    configureFast(fastStartDateTime, fastType) {
+        // calculate fast end datetime
+        const fastEndDateTime = this.calculateFastEndDateTime(fastStartDateTime, fastType);
+
+        let newFastObj = new Fast(true, fastStartDateTime, fastEndDateTime, fastType);
         let newState = {
             userData: {
                 ...this._userData,
@@ -47,7 +51,6 @@ class DataService {
         }
         // Save the new state to the JSON file
         this.saveDataToJSON(newState);
-
 
         // Set local user data state to the new state
         this._userData = newState.userData;
@@ -99,6 +102,17 @@ class DataService {
             console.log(`There was an error while writing to the JSON file. ${error}`);
             process.exit();
         }
+    }
+
+    calculateFastEndDateTime = (startDateTime, type) => {
+        // Convert hours from fast type to unix timestamp
+        let hoursToAdd = type*60*60*1000;
+        // get unix  date timestamp from start date
+        const dateTime = Date.parse(startDateTime);
+        // add the two timestamps to calculate end date
+        let endDateTime = dateTime + hoursToAdd;
+        // convert to JS datetime object and return
+        return new Date(endDateTime);
     }
 }
 

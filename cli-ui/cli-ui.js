@@ -1,5 +1,5 @@
-const CliMenuFactory = require('./cli-menu-factory');
 const DataServiceSingleton = require('../data/data-service');
+const { parseFastStartDate, buildMenu } = require('./helper');
 
 // Get Singleton instance
 const dataService = new DataServiceSingleton().instance;
@@ -7,22 +7,15 @@ const dataService = new DataServiceSingleton().instance;
 let readline = require('readline');
 let menu;
 
-const buildMenu = (type) => {
-    let cliMenu = CliMenuFactory(type);
-    for (let i = 0; i < cliMenu.length; i++) {
-        console.log(`${cliMenu[i].number === '' ? cliMenu[i].number : cliMenu[i].number + ':'} ${cliMenu[i].text}`);
-    }
-}
-
 // CLI Main Menu logic if there is an active fast session
 const showMainIfActiveFast = () => {
     // Clear screen
     // process.stdout.write('\033c');
 
-    // Get fast data from JSON
+    // Get fast data from JSON (userCurrentFast : Fast)
     const fastData = dataService.userCurrentFast;
 
-    if (!fastData._status) {
+    if (!fastData.status) {
         showMainIfNoActiveFast();
         return;
     }
@@ -121,8 +114,7 @@ const configureFastSession = async () => {
     // Clear screen
     process.stdout.write('\033c');
 
-
-    // Check if there is already a menu active. If true, close it.
+    // Check if there is already a menu/readline buffer active. If true, close it.
     if(menu) menu.close();
 
     // Creates a readline Interface instance
@@ -136,6 +128,7 @@ const configureFastSession = async () => {
     const getFastDate = () => {
         return new Promise(resolve => {
             menu.question('Enter the starting date and time for your fast (Example: 22 March 13:00):', input => {
+                // Parse input datetime into proper datetime format
                 resolve(input);
             });
         });
@@ -181,8 +174,11 @@ const configureFastSession = async () => {
     const fastStartDate = await getFastDate();
     const fastType = await getFastType();
 
+    // Resolve DateTime value
+    const parsedFastStartDateTime = parseFastStartDate(fastStartDate);
+
     // Edit fast data and update state
-    dataService.configureFast(fastStartDate, fastType);
+    dataService.configureFast(parsedFastStartDateTime, fastType);
 
     // Show active fast main menu
     showMainIfActiveFast();

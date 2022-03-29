@@ -1,5 +1,5 @@
-const ActiveFastMainMenu = require('./cli-menus/active-fast-menu');
-const InactiveFastMainMenu = require('./cli-menus/inactive-fast-menu');
+const ActiveFastMainMenu = require('./cli-menus/active-fast-main-menu');
+const InactiveFastMainMenu = require('./cli-menus/inactive-fast-main-menu');
 const CurrentFastInfoMenu = require('./cli-menus/current-fast-info-menu');
 const NoCurrentActiveFastMenu = require('./cli-menus/no-current-active-fast-menu');
 const FastTypeOptionsMenu = require('./cli-menus/fast-types-options-menu');

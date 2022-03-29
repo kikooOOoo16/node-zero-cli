@@ -4,8 +4,8 @@ module.exports = class NoCurrentFastMenu {
     _menu = [];
 
     constructor() {
-        this._menu[0] = new MenuElement('', 'You have no active fast.');
-        this._menu[1] = new MenuElement('', '------------------------');
+        this._menu[0] = new MenuElement('', 'You currently have no active fast.');
+        this._menu[1] = new MenuElement('', '----------------------------------');
     }
 
     get menu() {
