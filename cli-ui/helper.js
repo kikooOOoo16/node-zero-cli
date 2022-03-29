@@ -13,9 +13,8 @@ const parseFastStartDate = (dateTimeString) => {
     // get unix  date timestamp
     const dateTime = Date.parse(dateTimeString);
 
-    return new Date(dateTime);
     // return format is the following 2022-03-22T12:00:00.000Z
-    // console.log(`${parsedDateTime.getDate()} ${parsedDateTime.getMonth()} ${parsedDateTime.getFullYear()} ${parsedDateTime.getHours()}:${parsedDateTime.getMinutes()}`);
+    return new Date(dateTime);
 };
 
 const buildMenu = (type) => {

@@ -1,16 +1,15 @@
 const DataServiceSingleton = require('../data/data-service');
 const { parseFastStartDate, buildMenu } = require('./helper');
+const { validateDatetimeFormat } = require('./input-validators');
 
 // Get Singleton instance
 const dataService = new DataServiceSingleton().instance;
 
-let readline = require('readline');
+const readline = require('readline');
 let menu;
 
 // CLI Main Menu logic if there is an active fast session
 const showMainIfActiveFast = () => {
-    // Clear screen
-    // process.stdout.write('\033c');
 
     // Get fast data from JSON (userCurrentFast : Fast)
     const fastData = dataService.userCurrentFast;
@@ -112,7 +111,10 @@ const showMainIfNoActiveFast = () => {
 // CLI Menu for new and update fast
 const configureFastSession = async () => {
     // Clear screen
-    process.stdout.write('\033c');
+    // process.stdout.write('\033c');
+
+    // helper variable to break out of function if an input error occurs.
+    let inputError = false;
 
     // Check if there is already a menu/readline buffer active. If true, close it.
     if(menu) menu.close();
@@ -126,10 +128,15 @@ const configureFastSession = async () => {
 
     // Prompt user for fast starting date/time
     const getFastDate = () => {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             menu.question('Enter the starting date and time for your fast (Example: 22 March 13:00):', input => {
-                // Parse input datetime into proper datetime format
-                resolve(input);
+                // validate string input
+                if (validateDatetimeFormat(input)) {
+                    resolve(input);
+                } else {
+                    reject();
+                }
+
             });
         });
     };
@@ -162,17 +169,30 @@ const configureFastSession = async () => {
                         console.log('You selected a 36 hour type.');
                         resolve('36');
                         break;
-                    case '6':
-                        reject('Invalid data selected');
-                        break;
-                    default: console.log('\nPlease select a valid option.\n') /* show menu again if input does not match */;
+                    default:
+                        reject('Invalid input. Enter a number from 1 to 5.');
                 }
             });
         });
     };
 
-    const fastStartDate = await getFastDate();
-    const fastType = await getFastType();
+    const fastStartDate = await getFastDate()
+        .catch(() => {
+            // user input error, update error boolean
+            inputError = true
+        });
+    // return out of function if input error
+    if (inputError) return configureFastSession();
+
+    const fastType = await getFastType()
+        .catch(e => {
+            if (e) {
+                console.error(`${e}`);
+                inputError = true;
+            }
+        });
+    // return out of function if input error
+    if (inputError) return configureFastSession();
 
     // Resolve DateTime value
     const parsedFastStartDateTime = parseFastStartDate(fastStartDate);
