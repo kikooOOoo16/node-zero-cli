@@ -17,7 +17,7 @@ const parseFastStartDate = (dateTimeString) => {
 };
 
 // calculate elapsed time for current fast into
-calculateElapsedTime = (startedFast, returnInUni) => {
+const calculateElapsedTime = (startedFast, returnInUni) => {
     // set return uni to optional parameter
     returnInUni = returnInUni || 0;
     // get unix  date timestamp from fast start datetime
@@ -45,12 +45,12 @@ calculateElapsedTime = (startedFast, returnInUni) => {
     seconds = (seconds < 10) ? '0' + seconds : seconds;
 
     return (`${hours}:${minutes}:${seconds}`);
-}
+};
 
 // format js datetime string into proper format for menus
-formatDatetimeString = (dateTime) => {
+const formatDatetimeString = (dateTime) => {
     const parsedDateTime = new Date(dateTime);
     return (`${parsedDateTime.toLocaleDateString('en-GB')} ${parsedDateTime.toLocaleTimeString('en-GB')}`);
-}
+};
 
 module.exports = {parseFastStartDate, formatDatetimeString, calculateElapsedTime};

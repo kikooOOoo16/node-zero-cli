@@ -31,4 +31,4 @@ module.exports = class AllPreviousFastsMenu {
     get menu() {
         return this._menu;
     }
-}
+};

@@ -14,11 +14,11 @@ class CliUi {
     startUi = () => {
         // Start witch CLI Main Menu logic if there is an active fast session
         activeFastMainMenu(this.readline, this.menu);
-    }
+    };
 
     switchUiToNoActiveMainMenu = () => {
         noActiveFastMainMenu(this.readline, this.menu);
-    }
+    };
 
 }
 
@@ -33,4 +33,4 @@ module.exports = class CliSingleton {
     get instance() {
         return CliSingleton._instance;
     }
-}
+};

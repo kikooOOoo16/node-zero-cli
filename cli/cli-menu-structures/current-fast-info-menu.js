@@ -14,7 +14,7 @@ module.exports = class CurrentFastMenu {
         // Get Current Fast Data
         const currentFast = dataService.userCurrentFast;
 
-        this._menu[0] = new MenuElement('', chalk.magenta.bold(`\nCurrent fast info`));
+        this._menu[0] = new MenuElement('', chalk.magenta.bold('\nCurrent fast info'));
         this._menu[1] = new MenuElement('', chalk.magenta.bold('-----------------'));
         this._menu[2] = new MenuElement('Status', currentFast.status);
         this._menu[3] = new MenuElement('Started', formatDatetimeString(currentFast.started));
@@ -26,4 +26,4 @@ module.exports = class CurrentFastMenu {
     get menu() {
         return this._menu;
     }
-}
+};

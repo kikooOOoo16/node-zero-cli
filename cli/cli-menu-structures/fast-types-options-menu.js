@@ -14,4 +14,4 @@ module.exports = class FastTypeOptionsMenu {
     get menu() {
         return this._menu;
     }
-}
+};

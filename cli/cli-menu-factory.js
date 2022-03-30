@@ -7,7 +7,7 @@ const AllPreviousFastsInfoMenu = require('./cli-menu-structures/show-all-previou
 
 const chalk = require('chalk');
 
-cliMenuFactory = (type) => {
+const cliMenuFactory = (type) => {
     switch (type) {
         case 'NO_ACTIVE_FAST' :
         {
@@ -36,15 +36,15 @@ cliMenuFactory = (type) => {
         default :
             return [];
     }
-}
+};
 
 const buildMenu = (type) => {
     let cliMenu = cliMenuFactory(type);
     for (let i = 0; i < cliMenu.length; i++) {
         console.log(
-            chalk.rgb(128,107,182)
-            (cliMenu[i].number === '' ? cliMenu[i].number : (cliMenu[i].number + ' : ')) + cliMenu[i].text);
+            chalk.rgb(128,107,182)(cliMenu[i].number === '' ? cliMenu[i].number : (cliMenu[i].number + ' : ')) + cliMenu[i].text
+        );
     }
-}
+};
 
 module.exports = buildMenu;

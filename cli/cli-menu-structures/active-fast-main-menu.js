@@ -14,4 +14,4 @@ module.exports = class ActiveFastMenu {
     get menu() {
         return this._menu;
     }
-}
+};

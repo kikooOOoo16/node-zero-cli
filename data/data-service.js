@@ -23,21 +23,15 @@ class DataService {
                 );
         } catch (e) {
             // catch error if no data.json file was found and read failed
-            console.log(
-                chalk.red
-                (`\nThere was a problem reading the JSON file. ${e}`)
-            );
-            console.log(
-                chalk.red
-                ('Attempting to create a new JSON file...')
-            );
+            console.log(chalk.red(`\nThere was a problem reading the JSON file. ${e}`));
+            console.log(chalk.red('Attempting to create a new JSON file...'));
             // create empty object that represents the app's state
             const emptyUserState = {
                 userData :{
                     allFastSessions: [],
                     currentFast: {}
                 }
-            }
+            };
             // create new json file with empty state
             this.saveDataToJSON(emptyUserState);
         }
@@ -68,7 +62,7 @@ class DataService {
                     ...newFastObj
                 }
             }
-        }
+        };
         // Save the new state to the JSON file
         this.saveDataToJSON(newState);
 
@@ -79,17 +73,15 @@ class DataService {
         // Set auto end fast when end datetime is reached
         this.setFastExpirationTimer(fastType, fastStartDateTime);
 
-        console.log(
-            chalk.rgb(147,96,176)
-            (`Successfully configured the fast.\n`));
-    }
+        console.log(chalk.rgb(147,96,176)('Successfully configured the fast.\n'));
+    };
 
     endCurrentFast = () => {
         let newFastObj;
         let newAllFastSessions;
 
         // Create new Fast instance with the updated data immutably
-        newFastObj = {...this._userCurrentFast}
+        newFastObj = {...this._userCurrentFast};
         newFastObj._status = false;
 
         // calculate the elapsed time for the fast and save it to the newFastObj
@@ -111,7 +103,7 @@ class DataService {
                     ...newFastObj
                 }
             }
-        }
+        };
         // Save the new state to the JSON file
         this.saveDataToJSON(newState);
 
@@ -123,25 +115,21 @@ class DataService {
         this.clearFastExpirationTimer();
 
         // Notify user of changes
-        console.log(
-            chalk.rgb(147,96,176)
-            (`\nFast ended successfully.\n`));
+        console.log(chalk.rgb(147,96,176)('\nFast ended successfully.\n'));
 
         // update UI through CLI Singleton Instance
 
         // cliInstance.switchUiToNoActiveMainMenu();
-    }
+    };
 
     saveDataToJSON = (userState) => {
         try {
             writeFileSync('./data/data.json', JSON.stringify(userState), 'utf8');
         } catch (error) {
-            console.log(
-                chalk.red
-                (`There was an error while writing to the JSON file. ${error}`));
+            console.log(chalk.red(`There was an error while writing to the JSON file. ${error}`));
             process.exit();
         }
-    }
+    };
 
     calculateFastEndDateTime = (startDateTime, type) => {
         // Convert hours from fast type to unix timestamp
@@ -152,7 +140,7 @@ class DataService {
         const endDateTime = dateTime + hoursToAdd;
         // convert to JS datetime object and return
         return new Date(endDateTime);
-    }
+    };
 
     setFastExpirationTimer = (fastType, fastStartDateTime) => {
         // used as param for calculateElapsedTime helper function
@@ -179,7 +167,7 @@ class DataService {
             // end current fast
             this.endCurrentFast();
         }, msFromHours);
-    }
+    };
 
     // Clear the fast expiration timer if user ends fast or fast time expires
     clearFastExpirationTimer = () => {
@@ -188,7 +176,7 @@ class DataService {
             clearTimeout(this._fastExpirationTimer);
             // Show inactive fast menu ?
         }
-    }
+    };
 }
 
 module.exports = class DataServiceSingleton {
@@ -202,4 +190,4 @@ module.exports = class DataServiceSingleton {
     get instance() {
         return DataServiceSingleton._instance;
     }
-}
+};

@@ -52,6 +52,6 @@ const validateDatetimeFormat = (datetime) => {
         console.error(chalk.red('Incorrect date input for the selected month.'));
         return false;
     }
-}
+};
 
 module.exports = validateDatetimeFormat;

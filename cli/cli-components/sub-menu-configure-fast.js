@@ -77,7 +77,7 @@ const configureFastSession = async (readline, menu) => {
     const fastStartDate = await getFastDate()
         .catch(() => {
             // user input error, update error boolean
-            inputError = true
+            inputError = true;
         });
     // return out of function if input error
     if (inputError) return configureFastSession(readline, menu);
