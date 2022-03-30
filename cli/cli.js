@@ -1,4 +1,6 @@
 const activeFastMainMenu = require('./cli-components/main-menu-fast-component');
+const noActiveFastMainMenu = require('./cli-components/main-menu-nofast-component');
+
 
 class CliUi {
 
@@ -9,10 +11,15 @@ class CliUi {
         this.menu;
     }
 
-    startUi() {
+    startUi = () => {
         // Start witch CLI Main Menu logic if there is an active fast session
         activeFastMainMenu(this.readline, this.menu);
     }
+
+    switchUiToNoActiveMainMenu = () => {
+        noActiveFastMainMenu(this.readline, this.menu);
+    }
+
 }
 
 module.exports = class CliSingleton {

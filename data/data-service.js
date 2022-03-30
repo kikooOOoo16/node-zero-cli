@@ -1,7 +1,7 @@
+const { readFileSync, writeFileSync } = require('fs');
+const { calculateElapsedTime } = require('../cli/datetime-helper');
 const Fast = require('./fast');
 const chalk = require('chalk');
-
-const { readFileSync, writeFileSync } = require('fs');
 
 class DataService {
     _fastExpirationTimer;
@@ -123,6 +123,10 @@ class DataService {
         console.log(
             chalk.rgb(147,96,176)
             (`\nFast ended successfully.\n`));
+
+        // update UI through CLI Singleton Instance
+
+        // cliInstance.switchUiToNoActiveMainMenu();
     }
 
     saveDataToJSON = (userState) => {
@@ -148,14 +152,21 @@ class DataService {
     }
 
     setFastExpirationTimer = (fastType, fastStartDateTime) => {
+        // used as param for calculateElapsedTime helper function
+        const fastTimeJSDateObj = fastStartDateTime;
         // convert fastType hours into ms
         let msFromHours = fastType * 60 * 60 * 1000;
         // get unix  date timestamp from fast start datetime
         const fastStartDateTimeUnix = Date.parse(fastStartDateTime);
 
-        // if fastStartDateTime < date.now() subtract and add the elapsed time to the msFromHours value
+        // if fastStartDateTime > date.now() subtract and add the elapsed time to the msFromHours value
         if (fastStartDateTimeUnix > Date.now()) {
             msFromHours += fastStartDateTimeUnix - Date.now();
+        } else // if fastStartTime is grater than date.now the fast has already started
+        if (fastStartDateTimeUnix < Date.now()) {
+            const elapsedTime = calculateElapsedTime(fastTimeJSDateObj, true);
+            // subtract the elapsed time from the fastType hours calculated time
+            msFromHours -= elapsedTime;
         }
 
         // Clear previous expiration timer if it exists
@@ -164,7 +175,6 @@ class DataService {
         this._fastExpirationTimer = setTimeout(() => {
             // end current fast
             this.endCurrentFast();
-            // update UI
         }, msFromHours);
     }
 

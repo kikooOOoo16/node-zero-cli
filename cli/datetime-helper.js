@@ -17,7 +17,9 @@ const parseFastStartDate = (dateTimeString) => {
 };
 
 // calculate elapsed time for current fast into
-calculateElapsedTime = (startedFast) => {
+calculateElapsedTime = (startedFast, returnInUni) => {
+    // set return uni to optional parameter
+    returnInUni = returnInUni || 0;
     // get unix  date timestamp from fast start datetime
     const startedDateTimeUnix = Date.parse(startedFast);
     // add the two timestamps to calculate end date
@@ -27,8 +29,13 @@ calculateElapsedTime = (startedFast) => {
     if (elapsedTimeUnix < 0) {
         return 0;
     }
+    // if return uni is set to true return the elapsed time in unix timestamp format
+    if (returnInUni) {
+        // if less than 0 fast hasn't started yet
+        return elapsedTimeUnix < 0 ? 0 : elapsedTimeUnix;
+    }
 
-    // convert to unix timestamp to HH:MM:SS format and return
+    // convert the unix timestamp to HH:MM:SS format and return
     let seconds = Math.floor((elapsedTimeUnix / 1000) % 60),
         minutes = Math.floor((elapsedTimeUnix / (1000 * 60)) % 60),
         hours = Math.floor((elapsedTimeUnix / (1000 * 60 * 60)) % 24);
