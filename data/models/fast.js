@@ -27,4 +27,4 @@ module.exports = class Fast {
     get elapsedTime() {
         return this._elapsedTime;
     }
-}
+};

@@ -11,4 +11,4 @@ module.exports = class MenuElement {
     get text() {
         return this._text;
     }
-}
+};
