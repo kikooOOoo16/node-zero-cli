@@ -8,6 +8,7 @@ class DataService {
     _userCurrentFast;
     constructor() {
         try {
+            // attempt to read data from data.json file
             const data = readFileSync('./data/data.json');
             this._userData =  (JSON.parse(data.toString())).userData;
 
@@ -19,6 +20,7 @@ class DataService {
                     this._userData.currentFast._type
                 );
         } catch (e) {
+            // catch error if no data.json file was found and read failed
             console.log(
                 chalk.red
                 (`\nThere was a problem reading the JSON file. ${e}`)
@@ -34,7 +36,7 @@ class DataService {
                     currentFast: {}
                 }
             }
-            // create json file
+            // create new json file with empty state
             this.saveDataToJSON(emptyUserState);
         }
     }
