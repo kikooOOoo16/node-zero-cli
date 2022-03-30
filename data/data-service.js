@@ -1,6 +1,6 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { calculateElapsedTime } = require('../cli/datetime-helper');
-const Fast = require('./fast');
+const Fast = require('./models/fast');
 const chalk = require('chalk');
 
 class DataService {

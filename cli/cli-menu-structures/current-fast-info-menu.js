@@ -1,4 +1,4 @@
-const MenuElement = require('../cli-menu-element');
+const MenuElement = require('../../data/models/cli-menu-element');
 const DataServiceSingleton = require('../../data/data-service');
 const {formatDatetimeString, calculateElapsedTime} = require('../datetime-helper');
 const chalk = require('chalk');

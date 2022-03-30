@@ -1,4 +1,4 @@
-const MenuElement = require('../cli-menu-element');
+const MenuElement = require('../../data/models/cli-menu-element');
 
 module.exports = class FastTypeOptionsMenu {
     _menu = [];
