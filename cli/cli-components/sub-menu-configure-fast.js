@@ -1,6 +1,6 @@
 const DataServiceSingleton = require('../../data/data-service');
 const validateDatetimeFormat = require('../cli-input-validators');
-const parseFastStartDate = require('../helper');
+const {parseFastStartDate} = require('../datetime-helper');
 const buildMenu = require('../cli-menu-factory');
 const chalk = require('chalk');
 
@@ -45,26 +45,26 @@ const configureFastSession = async (readline, menu) => {
         buildMenu('FAST_TYPE_OPTIONS');
 
         return new Promise((resolve, reject) => {
-            menu.question('Select your fast type: \n', input => {
+            menu.question(chalk.magenta('Select your fast type: \n'), input => {
                 switch(input) {
                     case '1':
-                        console.log('You selected a 13 hours fast type.');
+                        console.log(chalk.magenta('You selected a 13 hours fast type.'));
                         resolve('13');
                         break;
                     case '2':
-                        console.log('You selected a 16 hours fast type..');
+                        console.log(chalk.magenta('You selected a 16 hours fast type..'));
                         resolve('16');
                         break;
                     case '3':
-                        console.log('You selected a 18 hours fast type.');
+                        console.log(chalk.magenta('You selected an 18 hours fast type.'));
                         resolve('18');
                         break;
                     case '4':
-                        console.log('You selected a 20 hours fast type.');
+                        console.log(chalk.magenta('You selected a 20 hours fast type.'));
                         resolve('20');
                         break;
                     case '5':
-                        console.log('You selected a 36 hour type.');
+                        console.log(chalk.magenta('You selected a 36 hour type.'));
                         resolve('36');
                         break;
                     default:

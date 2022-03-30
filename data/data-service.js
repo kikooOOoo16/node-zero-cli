@@ -4,8 +4,10 @@ const chalk = require('chalk');
 const { readFileSync, writeFileSync } = require('fs');
 
 class DataService {
+    _fastExpirationTimer;
     _userData;
     _userCurrentFast;
+
     constructor() {
         try {
             // attempt to read data from data.json file
@@ -74,6 +76,9 @@ class DataService {
         this._userData = newState.userData;
         this._userCurrentFast = newFastObj;
 
+        // Set auto end fast when end datetime is reached
+        this.setFastExpirationTimer(fastType, fastStartDateTime);
+
         console.log(
             chalk.rgb(147,96,176)
             (`Successfully configured the fast.\n`));
@@ -111,6 +116,9 @@ class DataService {
         this._userData = newState.userData;
         this._userCurrentFast = newFastObj;
 
+        // Clear the _fastExpirationTimer;
+        this.clearFastExpirationTimer();
+
         // Notify user of changes
         console.log(
             chalk.rgb(147,96,176)
@@ -137,6 +145,36 @@ class DataService {
         const endDateTime = dateTime + hoursToAdd;
         // convert to JS datetime object and return
         return new Date(endDateTime);
+    }
+
+    setFastExpirationTimer = (fastType, fastStartDateTime) => {
+        // convert fastType hours into ms
+        let msFromHours = fastType * 60 * 60 * 1000;
+        // get unix  date timestamp from fast start datetime
+        const fastStartDateTimeUnix = Date.parse(fastStartDateTime);
+
+        // if fastStartDateTime < date.now() subtract and add the elapsed time to the msFromHours value
+        if (fastStartDateTimeUnix > Date.now()) {
+            msFromHours += fastStartDateTimeUnix - Date.now();
+        }
+
+        // Clear previous expiration timer if it exists
+        this.clearFastExpirationTimer();
+        // set fast expiration timer
+        this._fastExpirationTimer = setTimeout(() => {
+            // end current fast
+            this.endCurrentFast();
+            // update UI
+        }, msFromHours);
+    }
+
+    // Clear the fast expiration timer if user ends fast or fast time expires
+    clearFastExpirationTimer = () => {
+        // check if fastExpirationTimer exists
+        if (this._fastExpirationTimer) {
+            clearTimeout(this._fastExpirationTimer);
+            // Show inactive fast menu ?
+        }
     }
 }
 
