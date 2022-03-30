@@ -1,9 +1,9 @@
-const ActiveFastMainMenu = require('./cli-menus/active-fast-main-menu');
-const InactiveFastMainMenu = require('./cli-menus/inactive-fast-main-menu');
-const CurrentFastInfoMenu = require('./cli-menus/current-fast-info-menu');
-const NoCurrentActiveFastMenu = require('./cli-menus/no-current-active-fast-menu');
-const FastTypeOptionsMenu = require('./cli-menus/fast-types-options-menu');
-const AllPreviousFastsInfoMenu = require('./cli-menus/show-all-previous-active-fasts');
+const ActiveFastMainMenu = require('./cli-menu-structures/active-fast-main-menu');
+const InactiveFastMainMenu = require('./cli-menu-structures/inactive-fast-main-menu');
+const CurrentFastInfoMenu = require('./cli-menu-structures/current-fast-info-menu');
+const NoCurrentActiveFastMenu = require('./cli-menu-structures/no-current-active-fast-menu');
+const FastTypeOptionsMenu = require('./cli-menu-structures/fast-types-options-menu');
+const AllPreviousFastsInfoMenu = require('./cli-menu-structures/show-all-previous-active-fasts');
 
 const chalk = require('chalk');
 

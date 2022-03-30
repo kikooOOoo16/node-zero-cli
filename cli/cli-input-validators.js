@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 const validateDatetimeFormat = (datetime) => {
     const monthsWith31Days = ['january', 'march', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     const monthsWith30Days = ['april', 'june', 'september', 'november'];
@@ -52,4 +54,4 @@ const validateDatetimeFormat = (datetime) => {
     }
 }
 
-module.exports = { validateDatetimeFormat }
+module.exports = validateDatetimeFormat;
