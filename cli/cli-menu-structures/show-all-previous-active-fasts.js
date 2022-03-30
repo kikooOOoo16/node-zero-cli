@@ -15,12 +15,13 @@ module.exports = class AllPreviousFastsMenu {
 
         if (allPreviousFasts && allPreviousFasts.length > 0) {
             for (let i = 0; i < allPreviousFasts.length; i++) {
-                this._menu[( i * 6)] = new MenuElement('', '--------------------------');
-                this._menu[1+ ( i * 6)] = new MenuElement('Status', allPreviousFasts[i]._status);
-                this._menu[2 + (i * 6)] = new MenuElement('Started', formatDatetimeString(allPreviousFasts[i]._started));
-                this._menu[3 + (i * 6)] = new MenuElement('Ended', formatDatetimeString(allPreviousFasts[i]._ending));
-                this._menu[4 + (i * 6)] = new MenuElement('Type', `${allPreviousFasts[i]._type}h`);
-                this._menu[5 + (i * 6)] = new MenuElement('', '--------------------------')
+                this._menu[( i * 7)] = new MenuElement('', '--------------------------');
+                this._menu[1+ ( i * 7)] = new MenuElement('Status', allPreviousFasts[i]._status);
+                this._menu[2 + (i * 7)] = new MenuElement('Started', formatDatetimeString(allPreviousFasts[i]._started));
+                this._menu[3 + (i * 7)] = new MenuElement('Ended', formatDatetimeString(allPreviousFasts[i]._ending));
+                this._menu[4 + (i * 7)] = new MenuElement('Type', `${allPreviousFasts[i]._type}h`);
+                this._menu[5 + (i * 7)] = new MenuElement('Time fasted', allPreviousFasts[i]._elapsedTime);
+                this._menu[6 + (i * 7)] = new MenuElement('', '--------------------------');
             }
         } else {
             this._menu[0] = new MenuElement('', '\nThere are no previously saved fast sessions.\n');

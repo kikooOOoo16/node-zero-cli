@@ -92,6 +92,9 @@ class DataService {
         newFastObj = {...this._userCurrentFast}
         newFastObj._status = false;
 
+        // calculate the elapsed time for the fast and save it to the newFastObj
+        newFastObj._elapsedTime = calculateElapsedTime(newFastObj._started);
+
         // Update all fast sessions array
         if (this._userData.allFastSessions && this._userData.allFastSessions.length > 0) {
             newAllFastSessions = [...this._userData.allFastSessions, newFastObj];
