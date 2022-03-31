@@ -3,6 +3,7 @@ const CliMenuEnums = require('../cli-menu-enums');
 const showMainIfNoActiveFast = require('./main-menu-nofast-component');
 const showConfigureFastSubMenu = require('./sub-menu-configure-fast');
 const buildMenu = require('../cli-menu-factory');
+const {checkIfFastIsCompleted} = require('../datetime-helper');
 const chalk = require('chalk');
 
 // CLI Main Menu logic if there is an active fast session
@@ -19,6 +20,11 @@ const showMainIfActiveFast = (readline, menu) => {
         // pass along readline and menu instance
         showMainIfNoActiveFast(readline, menu);
         return;
+    }
+
+    // Check if active fast ended while app was closed
+    if (checkIfFastIsCompleted(fastData.ending)) {
+        dataService.endCurrentFast(true);
     }
 
     // call helper method that u

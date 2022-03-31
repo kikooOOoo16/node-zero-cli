@@ -1,5 +1,5 @@
 const { readFileSync, writeFileSync } = require('fs');
-const { calculateElapsedTime } = require('../cli/datetime-helper');
+const { calculateElapsedTime, calculateFastEndDateTime, checkIfFastIsCompleted } = require('../cli/datetime-helper');
 const Fast = require('./models/fast');
 const chalk = require('chalk');
 
@@ -10,17 +10,7 @@ class DataService {
 
     constructor() {
         try {
-            // attempt to read data from data.json file
-            const data = readFileSync('./data/data.json');
-            this._userData =  (JSON.parse(data.toString())).userData;
-
-            this._userCurrentFast =
-                new Fast(
-                    this._userData.currentFast._status,
-                    this._userData.currentFast._started,
-                    this._userData.currentFast._ending,
-                    this._userData.currentFast._type
-                );
+            this.loadDataFromJSON();
         } catch (e) {
             // catch error if no data.json file was found and read failed
             console.log(chalk.red(`\nThere was a problem reading the JSON file. ${e}`));
@@ -34,6 +24,8 @@ class DataService {
             };
             // create new json file with empty state
             this.saveDataToJSON(emptyUserState);
+            // attempt to read data and create initial _userData state
+            this.loadDataFromJSON();
         }
     }
 
@@ -46,14 +38,24 @@ class DataService {
     }
 
     getAllFastSessions() {
-        return this._userData.allFastSessions;
+        // check if allFastSessions exist
+        if (this._userData.allFastSessions) {
+            return this._userData.allFastSessions;
+        }
+        return [];
     }
 
     // Update or Create Fast
     configureFast = (fastStartDateTime, fastType) => {
         // calculate fast end datetime
-        const fastEndDateTime = this.calculateFastEndDateTime(fastStartDateTime, fastType);
+        const fastEndDateTime = calculateFastEndDateTime(fastStartDateTime, fastType);
 
+        // check if the end date of the entered fast is in the past and return if it is
+        if (checkIfFastIsCompleted(fastEndDateTime)) {
+            return console.error(chalk.red(`\nThe end date for the fast has already passed. Change the start date to a more recent date.\n`));
+        }
+
+        // create new fast and app state objects
         const newFastObj = new Fast(true, fastStartDateTime, fastEndDateTime, fastType);
         const newState = {
             userData: {
@@ -76,16 +78,24 @@ class DataService {
         console.log(chalk.rgb(147,96,176)('Successfully configured the fast.\n'));
     };
 
-    endCurrentFast = () => {
+    endCurrentFast = (skipCalculateElapsedTime) => {
         let newFastObj;
         let newAllFastSessions;
 
-        // Create new Fast instance with the updated data immutably
-        newFastObj = {...this._userCurrentFast};
-        newFastObj._status = false;
+        // Set skipCalculateElapsedTime as optional param
+        skipCalculateElapsedTime = skipCalculateElapsedTime || 0;
 
-        // calculate the elapsed time for the fast and save it to the newFastObj
-        newFastObj._elapsedTime = calculateElapsedTime(newFastObj._started);
+        // Create new Fast instance with the updated data immutably, set the elapsedTime to the maximum possible time
+        newFastObj = {
+            ...this._userCurrentFast,
+            _status: false,
+            _elapsedTime: `${this._userCurrentFast.type}:00:00`
+        };
+
+        // calculate the elapsed time for the fast if needed and save it to the newFastObj
+        if (!skipCalculateElapsedTime) {
+            newFastObj._elapsedTime = calculateElapsedTime(newFastObj._started);
+        }
 
         // Update all fast sessions array
         if (this._userData.allFastSessions && this._userData.allFastSessions.length > 0) {
@@ -122,6 +132,22 @@ class DataService {
         // cliInstance.switchUiToNoActiveMainMenu();
     };
 
+    loadDataFromJSON = () => {
+        // attempt to read data from data.json file
+        const data = readFileSync('./data/data.json');
+        this._userData = (JSON.parse(data.toString())).userData;
+
+        if (this._userData.currentFast) {
+            this._userCurrentFast =
+                new Fast(
+                    this._userData.currentFast._status,
+                    this._userData.currentFast._started,
+                    this._userData.currentFast._ending,
+                    this._userData.currentFast._type
+                );
+        }
+    }
+
     saveDataToJSON = (userState) => {
         try {
             writeFileSync('./data/data.json', JSON.stringify(userState), 'utf8');
@@ -129,17 +155,6 @@ class DataService {
             console.log(chalk.red(`There was an error while writing to the JSON file. ${error}`));
             process.exit();
         }
-    };
-
-    calculateFastEndDateTime = (startDateTime, type) => {
-        // Convert hours from fast type to unix timestamp
-        const hoursToAdd = type*60*60*1000;
-        // get unix  date timestamp from start date
-        const dateTime = Date.parse(startDateTime);
-        // add the two timestamps to calculate end date
-        const endDateTime = dateTime + hoursToAdd;
-        // convert to JS datetime object and return
-        return new Date(endDateTime);
     };
 
     setFastExpirationTimer = (fastType, fastStartDateTime) => {

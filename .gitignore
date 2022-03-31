@@ -1,5 +1,5 @@
 # Local JSON file
-./data/data.json
+data/data.json
 
 # IDE related configs
 .idea
@@ -137,3 +137,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+

@@ -22,6 +22,7 @@ const calculateElapsedTime = (startedFast, returnInUni) => {
     returnInUni = returnInUni || 0;
     // get unix  date timestamp from fast start datetime
     const startedDateTimeUnix = Date.parse(startedFast);
+
     // add the two timestamps to calculate end date
     const elapsedTimeUnix = Date.now() - startedDateTimeUnix;
 
@@ -47,10 +48,28 @@ const calculateElapsedTime = (startedFast, returnInUni) => {
     return (`${hours}:${minutes}:${seconds}`);
 };
 
+calculateFastEndDateTime = (startDateTime, type) => {
+    // Convert hours from fast type to unix timestamp
+    const hoursToAdd = type*60*60*1000;
+    // get unix  date timestamp from start date
+    const dateTimeUnix = Date.parse(startDateTime);
+    // add the two timestamps to calculate end date
+    const endDateTime = dateTimeUnix + hoursToAdd;
+    // convert to JS datetime object and return
+    return new Date(endDateTime);
+};
+
+checkIfFastIsCompleted = (endDateTime) => {
+    // get unix  date timestamp from end date
+    const endDateTimeUnix = Date.parse(endDateTime);
+    // check if end datetime is in the past
+    return endDateTimeUnix < Date.now();
+};
+
 // format js datetime string into proper format for menus
 const formatDatetimeString = (dateTime) => {
     const parsedDateTime = new Date(dateTime);
     return (`${parsedDateTime.toLocaleDateString('en-GB')} ${parsedDateTime.toLocaleTimeString('en-GB')}`);
 };
 
-module.exports = {parseFastStartDate, formatDatetimeString, calculateElapsedTime};
+module.exports = {parseFastStartDate, formatDatetimeString, calculateElapsedTime, calculateFastEndDateTime, checkIfFastIsCompleted};
