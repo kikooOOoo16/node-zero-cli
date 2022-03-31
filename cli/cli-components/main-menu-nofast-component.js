@@ -1,3 +1,4 @@
+const CliMenuEnums = require('../cli-menu-enums');
 const showConfigureFastSubMenu = require('./sub-menu-configure-fast');
 const buildMenu = require('../cli-menu-factory');
 const chalk = require('chalk');
@@ -5,7 +6,7 @@ const chalk = require('chalk');
 // CLI Main Menu logic if there is no active fast
 const showMainIfNoActiveFast = (readline, menu) => {
     // Log the menu
-    buildMenu('NO_ACTIVE_FAST');
+    buildMenu(CliMenuEnums.NO_ACTIVE_FAST.value);
 
     // Check if there is already a menu active. If true, close it.
     if(menu) menu.close();
@@ -30,7 +31,7 @@ const showMainIfNoActiveFast = (readline, menu) => {
                 break;
             case '3':
                 console.log('\n');
-                buildMenu('ALL_PREVIOUS_FASTS');
+                buildMenu(CliMenuEnums.ALL_PREVIOUS_FASTS.value);
                 showMainIfNoActiveFast(readline, menu);
                 break;
             case 'q':

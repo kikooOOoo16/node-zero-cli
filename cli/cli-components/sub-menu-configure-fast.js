@@ -1,4 +1,5 @@
 const DataServiceSingleton = require('../../data/data-service');
+const CliMenuEnums = require('../cli-menu-enums');
 const validateDatetimeFormat = require('../cli-input-validators');
 const {parseFastStartDate} = require('../datetime-helper');
 const buildMenu = require('../cli-menu-factory');
@@ -42,7 +43,7 @@ const configureFastSession = async (readline, menu) => {
     // Prompt user for fast type selection
     const getFastType = () => {
         // build the fast types options menu
-        buildMenu('FAST_TYPE_OPTIONS');
+        buildMenu(CliMenuEnums.FAST_TYPE_OPTIONS.value);
 
         return new Promise((resolve, reject) => {
             menu.question(chalk.magenta('Select your fast type: \n'), input => {

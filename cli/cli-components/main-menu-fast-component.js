@@ -1,4 +1,5 @@
 const DataServiceSingleton = require('../../data/data-service');
+const CliMenuEnums = require('../cli-menu-enums');
 const showMainIfNoActiveFast = require('./main-menu-nofast-component');
 const showConfigureFastSubMenu = require('./sub-menu-configure-fast');
 const buildMenu = require('../cli-menu-factory');
@@ -21,7 +22,7 @@ const showMainIfActiveFast = (readline, menu) => {
     }
 
     // call helper method that u
-    buildMenu('ACTIVE_FAST');
+    buildMenu(CliMenuEnums.ACTIVE_FAST.value);
 
     // Check if there is already a menu active. If true, close it.
     if(menu) menu.close();
@@ -38,7 +39,7 @@ const showMainIfActiveFast = (readline, menu) => {
         switch(input) {
             case '1':
                 // Call to JSON singleton for fast status
-                buildMenu('CURRENT_FAST');
+                buildMenu(CliMenuEnums.CURRENT_FAST.value);
                 showMainIfActiveFast(readline, menu);
                 break;
             case '2':
@@ -51,7 +52,7 @@ const showMainIfActiveFast = (readline, menu) => {
                 showConfigureFastSubMenu(readline, menu);
                 break;
             case '4':
-                buildMenu('ALL_PREVIOUS_FASTS');
+                buildMenu(CliMenuEnums.ALL_PREVIOUS_FASTS.value);
                 showMainIfActiveFast(readline, menu);
                 break;
             case 'q':

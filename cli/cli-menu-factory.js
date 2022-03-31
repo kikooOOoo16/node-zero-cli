@@ -9,13 +9,13 @@ const chalk = require('chalk');
 
 const cliMenuFactory = (type) => {
     switch (type) {
-        case 'NO_ACTIVE_FAST' :
-        {
-            return (new InactiveFastMainMenu()).menu;
-        }
         case 'ACTIVE_FAST' :
         {
             return (new ActiveFastMainMenu()).menu;
+        }
+        case 'NO_ACTIVE_FAST' :
+        {
+            return (new InactiveFastMainMenu()).menu;
         }
         case 'FAST_TYPE_OPTIONS' :
         {

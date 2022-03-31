@@ -1,7 +1,6 @@
 const activeFastMainMenu = require('./cli-components/main-menu-fast-component');
 const noActiveFastMainMenu = require('./cli-components/main-menu-nofast-component');
 
-
 class CliUi {
 
     constructor() {

@@ -10,4 +10,4 @@ ___________________________________
 `));
 
 //Start the CLI
-cliInstance.startUi()
+cliInstance.startUi();
