@@ -1,7 +1,11 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { calculateElapsedTime, calculateFastEndDateTime, checkIfFastIsCompleted } = require('../cli/datetime-helper');
+// const CliSingleton = require('../cli/cli');
 const Fast = require('./models/fast');
 const chalk = require('chalk');
+
+// Throws TypeError: CliSingleton is not a constructor - no matter if it's in the DataService Constructor or in the DataServiceSingleton bellow.
+// const cliInstance = new CliSingleton().instance;
 
 class DataService {
     _fastExpirationTimer;
@@ -129,7 +133,7 @@ class DataService {
 
         // update UI through CLI Singleton Instance
 
-        // cliInstance.switchUiToNoActiveMainMenu();
+        cliInstance.switchUiToNoActiveMainMenu();
     };
 
     loadDataFromJSON = () => {
@@ -189,7 +193,6 @@ class DataService {
         // check if fastExpirationTimer exists
         if (this._fastExpirationTimer) {
             clearTimeout(this._fastExpirationTimer);
-            // Show inactive fast menu ?
         }
     };
 }
