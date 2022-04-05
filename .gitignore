@@ -1,8 +1,6 @@
 # Local JSON file
 data/data.json
-
-# IDE related configs
-.idea
+data/data.json.bkp
 
 # Node modules
 node_modules

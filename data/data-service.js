@@ -1,6 +1,7 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync, renameSync } = require('fs');
 const { calculateElapsedTime, calculateFastEndDateTime, checkIfFastIsCompleted } = require('../cli/datetime-helper');
 // const CliSingleton = require('../cli/cli');
+const checkIfStateIsValid = require('./json-integrity-checker');
 const Fast = require('./models/fast');
 const chalk = require('chalk');
 
@@ -13,23 +14,11 @@ class DataService {
     _userCurrentFast;
 
     constructor() {
+
         try {
             this.loadDataFromJSON();
         } catch (e) {
-            // catch error if no data.json file was found and read failed
-            console.log(chalk.red(`\nThere was a problem reading the JSON file. ${e}`));
-            console.log(chalk.red('Attempting to create a new JSON file...'));
-            // create empty object that represents the app's state
-            const emptyUserState = {
-                userData :{
-                    allFastSessions: [],
-                    currentFast: {}
-                }
-            };
-            // create new json file with empty state
-            this.saveDataToJSON(emptyUserState);
-            // attempt to read data and create initial _userData state
-            this.loadDataFromJSON();
+            this.handleError(e);
         }
     }
 
@@ -112,7 +101,7 @@ class DataService {
         let newState = {
             userData: {
                 ...this._userData,
-                allFastSessions: newAllFastSessions,
+                allFastSessions: [...newAllFastSessions],
                 currentFast: {
                     ...newFastObj
                 }
@@ -133,7 +122,7 @@ class DataService {
 
         // update UI through CLI Singleton Instance
 
-        cliInstance.switchUiToNoActiveMainMenu();
+        // cliInstance.switchUiToNoActiveMainMenu();
     };
 
     loadDataFromJSON = () => {
@@ -141,6 +130,12 @@ class DataService {
         const data = readFileSync('./data/data.json');
         this._userData = (JSON.parse(data.toString())).userData;
 
+        //  verify integrity of json file
+        if (checkIfStateIsValid(this._userData) === false) {
+            throw new Error('JSON file integrity compromised.');
+        }
+
+        // save user current fast as a Fast object.
         if (this._userData.currentFast) {
             this._userCurrentFast =
                 new Fast(
@@ -156,7 +151,7 @@ class DataService {
         try {
             writeFileSync('./data/data.json', JSON.stringify(userState), 'utf8');
         } catch (error) {
-            console.log(chalk.red(`There was an error while writing to the JSON file. ${error}`));
+            console.log(chalk.red(`ERROR: There was an error while writing to the JSON file. ${error}`));
             process.exit();
         }
     };
@@ -195,6 +190,30 @@ class DataService {
             clearTimeout(this._fastExpirationTimer);
         }
     };
+
+    handleError = (err) => {
+        if (err.message === 'JSON file integrity compromised.') {
+            // rename old data for backup
+            renameSync('./data/data.json', './data/data.json.bkp');
+            console.log(chalk.green('\nSaved corrupted data.json file as data.json.bkp. \n'));
+        }
+        // create empty object that represents the app's state
+        const emptyUserState = {
+            userData :{
+                allFastSessions: [],
+                currentFast: {}
+            }
+        };
+        // catch error if no data.json file was found and read failed
+        console.log(chalk.red('\nERROR: There was a problem reading the JSON file.'));
+        console.log(chalk.yellow('INFO: Attempting to create a new JSON file...'));
+
+        // create new json file with empty state
+        this.saveDataToJSON(emptyUserState);
+        console.log(chalk.green('\nNew JSON file successfully created.'));
+        // attempt to read data and create initial _userData state
+        this.loadDataFromJSON();
+    }
 }
 
 module.exports = class DataServiceSingleton {
