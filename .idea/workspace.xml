@@ -20,8 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="502aeb01-f1c8-4d9f-999e-2e5b17f53c4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/json-integrity-checker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/data/data-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-components/main-menu-fast-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/main-menu-fast-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-components/main-menu-nofast-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/main-menu-nofast-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-components/sub-menu-configure-fast.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/sub-menu-configure-fast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-input-validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-input-validators.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-enums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-factory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/active-fast-main-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/active-fast-main-menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/current-fast-info-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/current-fast-info-menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/fast-types-options-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/fast-types-options-menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/inactive-fast-main-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/inactive-fast-main-menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/no-current-active-fast-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/no-current-active-fast-menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/show-all-previous-active-fasts.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/show-all-previous-active-fasts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/datetime-helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/datetime-helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/data-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/json-integrity-checker.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/json-integrity-checker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/models/cli-menu-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/models/cli-menu-element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/models/fast.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/models/fast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/data/data.json" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/app/node_modules/rc/index.js&#10;C:/Users/krist/Desktop/Kristijan/Education/Work/Quantox/Internship/NodeJS/node-zero-cli/data/data.json" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.13.0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -50,6 +71,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\krist\Desktop\Kristijan\Education\Work\Quantox\Internship\NodeJS\node-zero-cli\app\data\db" />
+      <recent name="C:\Users\krist\Desktop\Kristijan\Education\Work\Quantox\Internship\NodeJS\node-zero-cli\app" />
       <recent name="C:\Users\krist\Desktop\Kristijan\Education\Work\Quantox\Internship\NodeJS\node-zero-cli\cli" />
       <recent name="C:\Users\krist\Desktop\Kristijan\Education\Work\Quantox\Internship\NodeJS\node-zero-cli\data\models" />
     </key>
@@ -74,7 +97,9 @@
       <workItem from="1649052980136" duration="5614000" />
       <workItem from="1649063457759" duration="3162000" />
       <workItem from="1649138759085" duration="9938000" />
-      <workItem from="1649162928540" duration="7921000" />
+      <workItem from="1649162928540" duration="8707000" />
+      <workItem from="1649225660813" duration="2410000" />
+      <workItem from="1649312317237" duration="2038000" />
     </task>
     <servers />
   </component>
@@ -102,10 +127,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="765" y="232" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1648638376308" />
-    <state x="690" y="263" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1649167327900">
+    <state x="690" y="263" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1649314181920">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="690" y="263" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1649167327900" />
+    <state x="690" y="263" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1649314181920" />
     <state x="718" y="396" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1648632780374">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

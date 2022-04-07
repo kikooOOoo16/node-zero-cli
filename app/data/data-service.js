@@ -127,7 +127,7 @@ class DataService {
 
     loadDataFromJSON = () => {
         // attempt to read data from data.json file
-        const data = readFileSync('./data/data.json');
+        const data = readFileSync('./data/db/data.json');
         this._userData = (JSON.parse(data.toString())).userData;
 
         //  verify integrity of json file
@@ -149,7 +149,7 @@ class DataService {
 
     saveDataToJSON = (userState) => {
         try {
-            writeFileSync('./data/data.json', JSON.stringify(userState), 'utf8');
+            writeFileSync('./data/db/data.json', JSON.stringify(userState), 'utf8');
         } catch (error) {
             console.log(chalk.red(`ERROR: There was an error while writing to the JSON file. ${error}`));
             process.exit();
@@ -194,7 +194,7 @@ class DataService {
     handleError = (err) => {
         if (err.message === 'JSON file integrity compromised.') {
             // rename old data for backup
-            renameSync('./data/data.json', './data/data.json.bkp');
+            renameSync('./data/db/data.json', './data/db/data.json.bkp');
             console.log(chalk.green('\nSaved corrupted data.json file as data.json.bkp. \n'));
         }
         // create empty object that represents the app's state

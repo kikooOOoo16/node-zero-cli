@@ -1,6 +1,6 @@
 # Local JSON file
-data/data.json
-data/data.json.bkp
+app/data/db/data.json
+app/data/db/data.json.bkp
 
 # Node modules
 node_modules
