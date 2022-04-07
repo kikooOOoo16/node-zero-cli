@@ -1,0 +1,9 @@
+version: '3'
+services:
+  node-zero-cli:
+    image: kristijan1/node-zero-cli:0.9
+    volumes:
+      - json-data:/data/db
+volumes:
+  json-data:
+    driver: local

@@ -45,7 +45,7 @@ class DataService {
 
         // check if the end date of the entered fast is in the past and return if it is
         if (checkIfFastIsCompleted(fastEndDateTime)) {
-            return console.error(chalk.red(`\nThe end date for the fast has already passed. Change the start date to a more recent date.\n`));
+            return console.error(chalk.red('\nThe end date for the fast has already passed. Change the start date to a more recent date.\n'));
         }
 
         // create new fast and app state objects
@@ -145,7 +145,7 @@ class DataService {
                     this._userData.currentFast._type
                 );
         }
-    }
+    };
 
     saveDataToJSON = (userState) => {
         try {
@@ -213,7 +213,7 @@ class DataService {
         console.log(chalk.green('\nNew JSON file successfully created.'));
         // attempt to read data and create initial _userData state
         this.loadDataFromJSON();
-    }
+    };
 }
 
 module.exports = class DataServiceSingleton {

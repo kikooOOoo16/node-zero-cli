@@ -20,29 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="502aeb01-f1c8-4d9f-999e-2e5b17f53c4c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-components/main-menu-fast-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/main-menu-fast-component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-components/main-menu-nofast-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/main-menu-nofast-component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-components/sub-menu-configure-fast.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/sub-menu-configure-fast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-input-validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-input-validators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-factory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/active-fast-main-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/active-fast-main-menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/current-fast-info-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/current-fast-info-menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/fast-types-options-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/fast-types-options-menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/inactive-fast-main-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/inactive-fast-main-menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/no-current-active-fast-menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/no-current-active-fast-menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli-menu-structures/show-all-previous-active-fasts.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-menu-structures/show-all-previous-active-fasts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/cli.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/datetime-helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/datetime-helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/data-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/json-integrity-checker.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/json-integrity-checker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/models/cli-menu-element.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/models/cli-menu-element.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/models/fast.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/models/fast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/cli/cli-components/main-menu-fast-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/cli/cli-components/main-menu-fast-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/data/data-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/data/data-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +83,7 @@
       <workItem from="1649138759085" duration="9938000" />
       <workItem from="1649162928540" duration="8707000" />
       <workItem from="1649225660813" duration="2410000" />
-      <workItem from="1649312317237" duration="2038000" />
+      <workItem from="1649312317237" duration="12629000" />
     </task>
     <servers />
   </component>

@@ -27,10 +27,10 @@ const showMainIfActiveFast = (readline, menu) => {
         dataService.endCurrentFast(true);
     }
 
-    // call helper method that u
+    // call helper method that outputs the correct menu
     buildMenu(CliMenuEnums.ACTIVE_FAST.value);
 
-    // Check if there is already a menu active. If true, close it.
+    // Check if there is already a menu/readline buffer active. If true, close it.
     if(menu) menu.close();
 
     //Creates a readline Interface instance
