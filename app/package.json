@@ -1,0 +1,29 @@
+{
+  "name": "zero-cli",
+  "version": "1.0.0",
+  "description": "A CLI app based on the Zero Fasting android app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js --ignore app/data/db/data.json",
+    "prod": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kikooOOoo16/node-zero-cli.git"
+  },
+  "author": "Kristijan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kikooOOoo16/node-zero-cli/issues"
+  },
+  "homepage": "https://github.com/kikooOOoo16/node-zero-cli#readme",
+  "devDependencies": {
+    "eslint": "^8.12.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
