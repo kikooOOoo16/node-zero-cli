@@ -84,4 +84,4 @@ The Docker image for this app is also hosted on DockerHub [kristijan1/node-zero-
 
 Kristijan Pavlevski - kristijan.pavlevski@outlook.com
 
-Project Link: [https://github.com/kikooOOoo16/ng-socketio-chat](https://github.com/kikooOOoo16/ng-socketio-chat)
+Project Link: [https://github.com/kikooOOoo16/node-zero-cli.git](https://github.com/kikooOOoo16/node-zero-cli.git)
